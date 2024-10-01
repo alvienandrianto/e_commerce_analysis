@@ -5,8 +5,9 @@ import streamlit as st
 from babel.numbers import format_currency
 import plotly.graph_objects as go
 import plotly.express as px
+from pathlib import Path
+from streamlit_option_menu import option_menu
 sns.set(style="dark")
-
 
 
 def create_daily_orders_df(df):
@@ -53,7 +54,10 @@ def create_rfm_df(df):
     return rfm_df
 
 # Load data
-all_df = pd.read_csv("main_data.csv")
+
+datafilename = Path(__file__).parent/'main_data.csv'
+all_df = pd.read_csv(datafilename) 
+# all_df = pd.read_csv("main_data.csv")
 
 datetime_columns = ["order_purchase_timestamp", "order_delivered_customer_date"]
 all_df.sort_values(by='order_purchase_timestamp', inplace=True)
@@ -140,9 +144,6 @@ colors = [violet]  # Using violet for line plots
 st.header('Dashboard E-Commerce Public:sparkles:')
 
 st.caption('Copyright (c) Your Company 2023')
-
-
-from streamlit_option_menu import option_menu
 
 # Sidebar or Navbar Option Menu
 selected = option_menu(
