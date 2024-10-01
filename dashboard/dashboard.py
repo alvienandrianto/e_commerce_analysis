@@ -69,9 +69,16 @@ for column in datetime_columns:
 min_date = all_df["order_purchase_timestamp"].min()
 max_date = all_df["order_purchase_timestamp"].max()
 
+image_path = Path(__file__).parent / 'ecommerce.png'
+
 with st.sidebar:
     # Add company logo with some spacing
-    st.image("ecommerce.png", use_column_width=True)
+    if image_path.is_file():
+        st.image(str(image_path), use_column_width=True)
+    else:
+        st.write("Logo not found")
+    
+    # st.image("ecommerce.png", use_column_width=True)
     st.markdown("## E-Commerce Dashboard")
     
     # Add horizontal divider
